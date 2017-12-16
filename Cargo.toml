@@ -1,0 +1,12 @@
+[package]
+name = "RustGenerals"
+version = "0.1.0"
+authors = ["Dariusz Kempa"]
+license = "MIT"
+
+
+
+[dependencies]
+piston_window = "0.74.0"
+piston2d-opengl_graphics = "0.50.0"
+piston2d-graphics = "0.24.0"
