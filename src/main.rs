@@ -1,8 +1,10 @@
 extern crate piston_window;
-
+#[macro_use] extern crate serde_derive;
 
 use piston_window::*;
 
+mod config;
+mod board;
 
 fn main() {
 

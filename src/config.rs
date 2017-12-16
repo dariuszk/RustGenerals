@@ -1,5 +1,7 @@
 
+extern crate serde_json;
 
+use board::*;
 
 #[derive(Serialize, Deserialize, Clone)]
 pub struct Config {
