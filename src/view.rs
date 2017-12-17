@@ -12,6 +12,7 @@ use self::opengl_graphics::GlGraphics;
 use game_state;
 use elements::Board;
 use elements::GridCell;
+use elements::Player;
 
 pub const BLACK: [f32; 4] = [0.0, 0.0, 0.0, 1.0];
 pub const LIGHT_GRAY: [f32; 4] = [0.3, 0.3, 0.3, 1.0];
@@ -30,14 +31,24 @@ pub fn render(c: Context, g: &mut GlGraphics, state: &game_state::State){
 
     piston_window::clear(LIGHT_GRAY, g);
 
-    render_board(c, g, &state.board);
+    render_board(c, g, &state.board, &state.players);
 }
 
-pub fn render_board(c: Context, g: &mut GlGraphics, board: &Board)
+pub fn render_board(c: Context, g: &mut GlGraphics, board:  &Board, players : &Vec<Player>)
 {
     for field in (*board.fields).iter()
     {
         render_cell(c, g, field);
+
+        for player in (players).iter()
+        {
+            if field.coordinates.is_in(player.position.x, player.position.y)
+                {
+                    mark_player(c, g, player, field);
+                }
+
+
+        }
     }
 }
 
@@ -48,7 +59,17 @@ pub fn render_cell(c: Context, g: &mut GlGraphics, cell: &GridCell)
               c.transform,
               g);
 
+}
 
+pub fn mark_player(c: Context, g: &mut GlGraphics, player: &Player, cell: &GridCell)
+{
+    rectangle(CYAN,
+              [(cell.coordinates.x + 2.0) as f64,
+                  ( cell.coordinates.y + 2.0 ) as f64,
+                  ( cell.coordinates.with - 3.0 ) as f64,
+                  ( cell.coordinates.height  - 3.0 )as f64],
+              c.transform,
+              g);
 
 }
 

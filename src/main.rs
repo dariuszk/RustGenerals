@@ -1,18 +1,21 @@
-
 extern crate piston_window;
 extern crate opengl_graphics;
 #[macro_use] extern crate serde_derive;
 
 use piston_window::*;
+use piston_window::Button::Keyboard;
 use std::fs::File;
 use std::io::prelude::*;
 use opengl_graphics::GlGraphics;
+use piston_window::ButtonState;
 
 mod config;
 mod view;
 mod game_state;
 mod elements;
+mod controllers;
 
+use controllers::{ InputController };
 
 extern crate serde_json;
 
@@ -30,7 +33,7 @@ fn main() {
 
     let config: config::Config = load_config();
 
-    let mut window: PistonWindow = WindowSettings::new(config.title.clone(), (640, 480))
+    let mut window: PistonWindow = WindowSettings::new(config.title.clone(), (800, 600))
         .opengl(opengl)
         .exit_on_esc(true)
         .build()
@@ -38,13 +41,29 @@ fn main() {
 
     let mut gl = GlGraphics::new(opengl);
     let mut state = game_state::State::new(config.board_size);
+    let mut input_controller = InputController::new();
+
     while let Some(e) = window.next() {
 
-        if let Some(ref args) = e.render_args() {
+        match e {
+            Event::Input(Input::Button(b_args)) =>
+                {
+                    use ButtonState::*;
+                    match b_args.state {
+                        Press => input_controller.key_press(b_args.button),
+                        Release => input_controller.key_release(b_args.button)
+                    }
+                },
+            _ => {}
+        }
 
+
+
+        if let Some(ref args) = e.render_args() {
             gl.draw(args.viewport(), |c, g| view::render(c, g,  &state));
         }
 
-    }
 
+
+    }
 }

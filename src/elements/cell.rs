@@ -1,11 +1,12 @@
 
 #[derive(Copy, Clone)]
 pub struct CellCoordinate{
-    pub with: f32,
-    pub height: f32,
-    pub x: f32,
-    pub y: f32
-
+    pub with: f64,
+    pub height: f64,
+    pub x: f64,
+    pub y: f64,
+    pub x_max: f64,
+    pub y_max: f64,
 }
 
 impl Default for CellCoordinate {
@@ -16,23 +17,32 @@ impl Default for CellCoordinate {
             height: 0.0,
             x: 0.0,
             y: 0.0,
+            x_max: 0.0,
+            y_max: 0.0,
         }
     }
 }
 
 impl CellCoordinate
 {
-    pub fn new( with : f32, height : f32, x : f32, y : f32 ) -> CellCoordinate
+    pub fn new( mut with : f64, mut height : f64, mut x : f64, mut y : f64, mut x_max : f64, mut y_max: f64 ) -> CellCoordinate
     {
-        CellCoordinate{ with, height, x, y }
+        CellCoordinate{ with, height, x, y, x_max, y_max }
     }
 
-    pub fn set(&mut self, with : f32, height : f32, x : f32, y : f32)
+    pub fn set(&mut self, with : f64, height : f64, x : f64, y : f64, x_max : f64, y_max: f64)
     {
         self.with = with;
         self.height = height;
         self.x = x;
         self.y = y;
+        self.x_max = x_max;
+        self.y_max = y_max;
+    }
+
+    pub fn is_in(self, pos_x : f64, pos_y : f64) -> bool
+    {
+        return  self.x <= pos_x && pos_x <= self.x_max && self.y <= pos_y && pos_y <= self.y_max ;
     }
 }
 

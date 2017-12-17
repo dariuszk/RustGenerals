@@ -13,10 +13,10 @@ impl BoardSize {
         field_size,
     } }
 
-    pub fn get_width(&mut self) -> f32 { (self.field_size * self.rows_numbers) as f32 }
-    pub fn get_height(&mut self) -> f32 { (self.field_size * self.columns_numbers) as f32 }
-    pub fn get_all_fields(&mut self) -> usize { (self.columns_numbers * self.rows_numbers) as usize }
-    pub fn get_field_size(&mut self) -> f32 { self.field_size as f32 }
+    pub fn get_width(&self) -> f64 { (self.field_size * self.rows_numbers) as f64 }
+    pub fn get_height(&self) -> f64 { (self.field_size * self.columns_numbers) as f64 }
+    pub fn get_all_fields(&self) -> usize { (self.columns_numbers * self.rows_numbers) as usize }
+    pub fn get_field_size(&self) -> f64 { self.field_size as f64 }
 }
 
 
