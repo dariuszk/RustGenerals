@@ -1,4 +1,3 @@
-
 extern crate serde_json;
 
 #[derive(Clone, Serialize, Deserialize)]
@@ -14,8 +13,10 @@ impl BoardSize {
         field_size,
     } }
 
-    pub fn get_width(&mut self) -> u32 { self.field_size * self.rows_numbers }
-    pub fn get_height(&mut self) -> u32 { self.field_size * self.columns_numbers }
+    pub fn get_width(&mut self) -> f32 { (self.field_size * self.rows_numbers) as f32 }
+    pub fn get_height(&mut self) -> f32 { (self.field_size * self.columns_numbers) as f32 }
+    pub fn get_all_fields(&mut self) -> usize { (self.columns_numbers * self.rows_numbers) as usize }
+    pub fn get_field_size(&mut self) -> f32 { self.field_size as f32 }
 }
 
 
@@ -35,7 +36,7 @@ impl Default for Config {
             board_size: BoardSize {
                 rows_numbers: 10,
                 columns_numbers: 10,
-                field_size: 10,
+                field_size: 50,
             },
         }
     }
