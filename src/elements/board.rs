@@ -1,7 +1,7 @@
 
-extern crate rand;
+
 use config::BoardSize;
-use rand::Rng;
+
 
 
 use elements::{GridCell, CellCoordinate};
@@ -15,7 +15,7 @@ impl Board {
     pub fn new(mut size: BoardSize ) -> Board {
 
         let mut fields : Box<[GridCell]> = vec![GridCell::default(); size.clone().get_all_fields() ].clone().into_boxed_slice();
-        let mut rng = rand::thread_rng();
+        //let mut rng = rand::thread_rng();
         let mut tmp_field_in_col = 0;
         let mut row_pos = 0.0;
         let mut col_pos = 0.0;
@@ -40,8 +40,8 @@ impl Board {
                 row_pos += size.get_field_size() + grid;
             }
 
-            if rng.gen()
-            field.cell_type =
+//            if rng.gen()
+//            field.cell_type = set_random_type
         }
 
 

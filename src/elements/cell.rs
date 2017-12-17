@@ -76,16 +76,16 @@ impl GridCell{
         self.coordinates = new_coordinates;
     }
 
-    pub fn set_random_type(&mut self, &mut rng : ThreadRng)
-    {
-        let between = Range::new(0, 5); // TODO maybe macro for enum length
-
-        match between.ind_sample(&mut rng)
-            {
-                0 => { self.cell_type = GridCellType::Void },
-                1 => { self.cell_type = GridCellType::Mountains },
-                2 => { self.cell_type = GridCellType::Town },
-                _ =>  { self.cell_type = GridCellType::Void },
-            }
-    }
+//    pub fn set_random_type(&mut self, &mut rng : ThreadRng)
+//    {
+//        let between = Range::new(0, 5); // TODO maybe macro for enum length
+//
+//        match between.ind_sample(&mut rng)
+//            {
+//                0 => { self.cell_type = GridCellType::Void },
+//                1 => { self.cell_type = GridCellType::Mountains },
+//                2 => { self.cell_type = GridCellType::Town },
+//                _ =>  { self.cell_type = GridCellType::Void },
+//            }
+//    }
 }
