@@ -3,6 +3,7 @@ use config::BoardSize;
 use elements::Player;
 use elements::CellCoordinate;
 
+
 pub struct State {
     pub board: elements::Board,  // Game elements to be presented
     pub score: u32,                      // Player current score

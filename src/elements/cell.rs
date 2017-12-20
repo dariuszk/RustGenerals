@@ -1,5 +1,7 @@
+use super::Position;
 
-#[derive(Copy, Clone)]
+
+#[derive(Copy, Clone, Debug)]
 pub struct CellCoordinate{
     pub with: f64,
     pub height: f64,
@@ -48,7 +50,7 @@ impl CellCoordinate
 
 
 
-#[derive(Copy, Clone, PartialEq)]
+#[derive(Debug,Copy, Clone, PartialEq)]
 pub enum GridCellType {
     Void,
     Acquired,
@@ -57,12 +59,41 @@ pub enum GridCellType {
     Capital
 }
 
-#[derive(Copy, Clone)]
+
+#[derive(Copy, Clone, Debug)]
+pub struct CellInfo {
+    pub row_id: usize,
+    pub column_id: usize,
+    pub position: Position,
+    pub row_min: usize,
+    pub row_max: usize,
+    pub col_min: usize,
+    pub col_max: usize
+}
+
+impl Default for CellInfo
+{
+    fn default() -> CellInfo
+    {
+        CellInfo{
+            row_id: 0,
+            column_id: 0,
+            position: Position::default(),
+            row_min: 0,
+            row_max: 0,
+            col_min: 0,
+            col_max: 0,
+        }
+    }
+}
+
+#[derive(Debug, Copy, Clone )]
 pub struct GridCell {
     pub cell_type: GridCellType,
     pub owner: i32,
     pub troops: i32,
     pub coordinates: CellCoordinate,
+    pub info: CellInfo
 }
 
 /// Default GridCell's shape_index to -1 instead of 0
@@ -74,12 +105,21 @@ impl Default for GridCell {
             owner: -1,
             troops: 0,
             coordinates: CellCoordinate::default(),
+            info: CellInfo::default(),
         }
     }
 }
 
 
 impl GridCell{
+
+    pub fn new(cell_id : CellInfo) -> GridCell
+    {
+        let mut cell = GridCell::default();
+        cell.info = cell_id;
+
+        return  cell;
+    }
 
     pub fn set_coordinates(&mut self, new_coordinates : CellCoordinate)
     {

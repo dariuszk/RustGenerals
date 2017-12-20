@@ -17,6 +17,8 @@ impl BoardSize {
     pub fn get_height(&self) -> f64 { (self.field_size * self.columns_numbers) as f64 }
     pub fn get_all_fields(&self) -> usize { (self.columns_numbers * self.rows_numbers) as usize }
     pub fn get_field_size(&self) -> f64 { self.field_size as f64 }
+    pub fn get_columns_number(&self) -> usize { self.columns_numbers as usize }
+    pub fn get_rows_number(&self) -> usize { self.rows_numbers as usize }
 }
 
 
@@ -35,8 +37,8 @@ impl Default for Config {
             title: "Rust generals".to_owned(),
             board_size: BoardSize {
                 rows_numbers: 10,
-                columns_numbers: 10,
-                field_size: 50,
+                columns_numbers: 13,
+                field_size: 30,
             },
         }
     }

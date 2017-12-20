@@ -9,8 +9,10 @@ license = "MIT"
 [dependencies]
 piston_window = "0.74.0"
 piston2d-opengl_graphics = "0.50.0"
+
 piston2d-graphics = "0.24.0"
 serde = "1.0"
 serde_derive = "1.0"
 serde_json = "1.0"
 rand = "0.3"
+queue = "0.2.0"

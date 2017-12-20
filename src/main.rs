@@ -1,6 +1,8 @@
 extern crate piston_window;
 extern crate opengl_graphics;
 #[macro_use] extern crate serde_derive;
+extern crate rand;
+extern crate queue;
 
 use piston_window::*;
 use piston_window::Button::Keyboard;
@@ -14,8 +16,12 @@ mod view;
 mod game_state;
 mod elements;
 mod controllers;
+mod resources;
 
 use controllers::{ InputController };
+use controllers::StateInTimeController;
+use resources::Resources;
+
 
 extern crate serde_json;
 
@@ -42,6 +48,8 @@ fn main() {
     let mut gl = GlGraphics::new(opengl);
     let mut state = game_state::State::new(config.board_size);
     let mut input_controller = InputController::new();
+    let mut state_controller = StateInTimeController::new();
+    let mut resources = Resources::new();
 
     while let Some(e) = window.next() {
 
@@ -54,13 +62,15 @@ fn main() {
                         Release => input_controller.key_release(b_args.button)
                     }
                 },
+            Event::Loop( Loop::Update(update_args) ) =>
+                {
+                    state_controller.update(update_args.dt, &mut input_controller.actions(), &mut state );
+                },
             _ => {}
         }
 
-
-
         if let Some(ref args) = e.render_args() {
-            gl.draw(args.viewport(), |c, g| view::render(c, g,  &state));
+            gl.draw(args.viewport(), |c, g| view::render(c, g, &mut state, &mut resources));
         }
 
 
