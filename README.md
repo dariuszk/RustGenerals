@@ -1,2 +1,2 @@
 # RustGenerals
-inspired by generals.io
+learning *RUST* by creating a game (inspired by generals.io)
